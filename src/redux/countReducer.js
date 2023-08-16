@@ -2,29 +2,38 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const counter = createSlice({
-    initialState:{
-        count : 0,
-        cartList:[]
+    initialState: {
+        count: 0,
+        cartList: []
     },
-    name:'counter',
-    reducers:{
-        incrementFunction:(state,action)=>{
-            console.log(action.payload,'action');
-            state.cartList.find((item)=> {
-                if(item.id === action.payload){
+    name: 'counter',
+    reducers: {
+        incrementFunction: (state, action) => {
+            state.cartList.find((item) => {
+                if (item.id === action.payload) {
                     return state.cartList.push(item.count++)
-                }else{
-                    state.cartList.push({id:action.payload,counter:1})
                 }
-            }  )
+            })
         },
-        decrementFunction:(state,action)=>{
-            state.count --
+        decrementFunction: (state, action) => {
+            state.cartList.find((item) => {
+                if (item.id === action.payload) {
+                    return state.cartList.push(item.count--)
+                }
+            })
+        },
+        addToCart: (state, action) => {
+            state.cartList.find((item) => {
+                if (item.id === action.payload.id) {
+                    return item.count++
+                }
+            })
+            state.cartList.push({ ...action.payload, count: 1 })
         }
     }
 })
 
 
-export const { decrementFunction,incrementFunction  } = counter.actions;
+export const { decrementFunction, incrementFunction, addToCart } = counter.actions;
 
 export default counter.reducer;

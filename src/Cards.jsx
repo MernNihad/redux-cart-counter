@@ -1,18 +1,9 @@
 import React from "react";
-import { Button, Card } from "react-bootstrap";
-import { decrementFunction, incrementFunction } from "./redux/countReducer";
-import { useDispatch, useSelector } from "react-redux";
-import CountButtons from "./ConutButtons";
+import { Card } from "react-bootstrap";
+import ButtonsContainer from "./Buttons/ButtonsContainer";
 
-function Cards({products}) {
-    const values=useSelector((state)=>state)
-    console.log(values.countReducer.cartList,"hello");
-   
-
-
-    const dispatch = useDispatch();
-
-     const {Body,Image,id,name,price} = products
+function Cards({ products }) {
+  const { Body, Image, name, price } = products;
 
   return (
     <div
@@ -34,14 +25,8 @@ function Cards({products}) {
           <Card.Text>{Body}</Card.Text>
           <div>
             <h4>PRICE : {price}</h4>
-
-
           </div>
-
-          <CountButtons products={products} />
-          <Button variant="primary" className="bg-warning" onChange={() => {}}>
-            ADD TO CART
-          </Button>
+          <ButtonsContainer products={products}/>
         </Card.Body>
       </Card>
     </div>
